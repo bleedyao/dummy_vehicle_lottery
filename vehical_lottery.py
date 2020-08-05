@@ -14,20 +14,25 @@ class RandomInformation:
         elif maxNumber < 0:
             maxNumber = 0
         self.__maxNumber = maxNumber
-        self.__applicationCodePool = [str(i).zfill(13)
-                                      for i in range(1, self.__maxNumber + 1)]
-
-    def randomApplicationCode(self, seed=-1):
-        '''随机生产13位数字字符串'''
-        if len(self.__applicationCodePool) > 0:
-            if seed > 0:
-                random.seed(seed)
-            return self.__applicationCodePool.pop(random.randint(0, len(self.__applicationCodePool) - 1))
-        else:
-            raise Exception('Application code is not enough')
+        self.__applicationCodePool = dict()
 
     @running_time
-    def findMe(self):
+    def randomApplicationCode(self, seed=-1):
+        '''随机生产13位数字字符串'''
+        if len(self.__applicationCodePool) >= self.__maxNumber:
+            raise Exception('Application code is not enough')
+        if seed > 0:
+            random.seed(seed)
+        tempStr = str(random.choice(range(self.__maxNumber))).zfill(13)
+        while tempStr in self.__applicationCodePool:
+            self.__applicationCodePool[tempStr] = self.__applicationCodePool[tempStr] + 1
+            tempStr = str(random.choice(range(self.__maxNumber))).zfill(13)
+        else:
+            self.__applicationCodePool[tempStr] = 1
+            return tempStr
+
+    @running_time
+    def __findMe(self):
         temp = ''
         while temp != '0000000006741':
             temp = self.randomApplicationCode()
@@ -42,4 +47,4 @@ class RandomInformation:
 
 
 if __name__ == "__main__":
-    RandomInformation().findMe()
+    RandomInformation().__findMe()

@@ -100,6 +100,29 @@ class TestRandomApplicationCode(unittest.TestCase):
         else:
             with self.assertRaises(Exception):
                 ri.randomApplicationCode()
+    def test_application_code_fifty_thousand(self):
+        n = 50000
+        tempList = []
+        tempStr = ''
+        ri = RandomInformation(n)
+        for i in range(n):
+            tempStr = ri.randomApplicationCode()
+            self.assertTrue(tempStr not in tempList)
+            tempList.append(tempStr)
+        else:
+            with self.assertRaises(Exception):
+                ri.randomApplicationCode()
+
+    def test_application_code_hundred_thousand(self):
+        n = 100000
+        tempList = []
+        tempStr = ''
+        ri = RandomInformation(n)
+        for i in range(n // 2):
+            tempStr = ri.randomApplicationCode()
+            self.assertTrue(tempStr not in tempList)
+            tempList.append(tempStr)
+
 
 
 if __name__ == '__main__':
