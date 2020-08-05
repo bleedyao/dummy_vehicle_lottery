@@ -8,21 +8,21 @@ def start_lottery():
 
 
 class RandomInformation:
-    def __init__(self, maxNumber=10_000_000_000_000):
+    def __init__(self, maxNumber=10_000_000_000_000, seed=-1):
         if maxNumber > 10_000_000_000_000:
             maxNumber = 10_000_000_000_000
         elif maxNumber < 0:
             maxNumber = 0
         self.__maxNumber = maxNumber
         self.__applicationCodePool = dict()
+        self.__seed = seed
 
-    @running_time
-    def randomApplicationCode(self, seed=-1):
+    def randomApplicationCode(self):
         '''随机生产13位数字字符串'''
         if len(self.__applicationCodePool) >= self.__maxNumber:
             raise Exception('Application code is not enough')
-        if seed > 0:
-            random.seed(seed)
+        if self.__seed > 0:
+            random.seed(self.__seed)
         tempStr = str(random.choice(range(self.__maxNumber))).zfill(13)
         while tempStr in self.__applicationCodePool:
             self.__applicationCodePool[tempStr] = self.__applicationCodePool[tempStr] + 1
