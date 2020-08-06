@@ -16,6 +16,8 @@ class RandomInformation:
         self.__maxNumber = maxNumber
         self.__applicationCodePool = dict()
         self.__seed = seed
+        self.__randomMinNumber = 0
+        self.__randomMaxNumber = self.__maxNumber
 
     def randomApplicationCode(self):
         '''随机生产13位数字字符串'''
@@ -23,28 +25,23 @@ class RandomInformation:
             raise Exception('Application code is not enough')
         if self.__seed > 0:
             random.seed(self.__seed)
-        tempStr = str(random.choice(range(self.__maxNumber))).zfill(13)
-        while tempStr in self.__applicationCodePool:
-            self.__applicationCodePool[tempStr] = self.__applicationCodePool[tempStr] + 1
-            tempStr = str(random.choice(range(self.__maxNumber))).zfill(13)
+        temp = None
+        while temp in self.__applicationCodePool.keys() or temp == None:
+            temp = random.choice(
+                range(self.__randomMinNumber, self.__randomMaxNumber))
+            if temp <= self.__randomMinNumber and self.__randomMinNumber < self.__randomMaxNumber:
+                self.__randomMinNumber += 1
+            elif temp >= self.__randomMaxNumber-1 and self.__randomMinNumber < self.__randomMaxNumber:
+                self.__randomMaxNumber -= 1
+            # print(self.__randomMinNumber, self.__randomMaxNumber)
         else:
-            self.__applicationCodePool[tempStr] = 1
-            return tempStr
+            self.__applicationCodePool[temp] = None
+            return str(temp).zfill(13)
 
-    @running_time
-    def __findMe(self):
-        temp = ''
-        while temp != '0000000006741':
-            temp = self.randomApplicationCode()
-            print(temp)
-        print('find my code: %s' % temp)
-        print('registered code length: %d' % (len(self.__applicationCodePool)))
+    def getMaxNumber(self):
+        return self.__maxNumber
 
     def idGenerater(self, id=0):
         while True:
             id += 1
             yield id
-
-
-if __name__ == "__main__":
-    RandomInformation().__findMe()
