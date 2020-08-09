@@ -3,10 +3,6 @@ import time
 from decorator import running_time
 
 
-def start_lottery():
-    pass
-
-
 class RandomInformation:
     def __init__(self, maxNumber=10_000_000_000_000, seed=-1):
         if maxNumber > 10_000_000_000_000:
