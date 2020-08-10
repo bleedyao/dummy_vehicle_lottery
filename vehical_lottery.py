@@ -4,16 +4,50 @@ from decorator import running_time
 
 
 class SessionInfo:
-    def __init__(self):
-        self.__id = ''
-        self.__descript = ''
-        self.__startDate= ''
-        self.__endDate = ''
-        self.__duration= ''
-        self.__validApplictionCodeCount = 0
+    def __init__(self, id=0, descript='', validCount=0, totalWins=0):
+        self.__id = id
+        self.__descript = descript
+        self.__startTime = 0
+        self.__endTime = 0
+        self.__duration = 0
+        self.__validApplictionCodeCount = validCount
         # 总中奖人数（中签总数）
-        self.__totalWins = 0
-        self.__seed = 0
+        self.__totalWins = totalWins
+        self.__seed = random.randint(0, 999_999)
+
+    def getId(self):
+        return self.__id
+
+    def getDescript(self):
+        return self.__descript
+
+    def setStartTime(self, second):
+        if type(second) != int or second < 0:
+            second = 0
+        self.__startTime = second
+
+    def getStartTime(self):
+        return self.__startTime
+
+    def setEndTime(self, second):
+        if type(second) != int or second < self.__startTime:
+            second = self.__startTime
+        self.__endTime = second
+
+    def getEndTime(self):
+        return self.__endTime
+
+    def getDuration(self):
+        return self.__endTime - self.__startTime
+
+    def getValidApplictionCodeCount(self):
+        return self.__validApplictionCodeCount
+
+    def getTotalWins(self):
+        return self.__totalWins
+
+    def getSeed(self):
+        return self.__seed
 
 
 class RandomInformation:
