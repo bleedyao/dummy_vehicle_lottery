@@ -19,4 +19,3 @@ class TestId(unittest.TestCase):
         for i in range(20):
             next(ids)
         self.assertNotEqual(next(ids), 1)
-

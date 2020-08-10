@@ -3,6 +3,19 @@ import time
 from decorator import running_time
 
 
+class SessionInfo:
+    def __init__(self):
+        self.__id = ''
+        self.__descript = ''
+        self.__startDate= ''
+        self.__endDate = ''
+        self.__duration= ''
+        self.__validApplictionCodeCount = 0
+        # 总中奖人数（中签总数）
+        self.__totalWins = 0
+        self.__seed = 0
+
+
 class RandomInformation:
     def __init__(self, maxNumber=10_000_000_000_000, seed=-1):
         if maxNumber > 10_000_000_000_000:

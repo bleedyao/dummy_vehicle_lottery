@@ -1,12 +1,12 @@
 import datetime
+from time_util import timeFormat
 
 
 class ParticipantInfo:
     def __init__(self, id, applicationDate, applicationCode, rate):
         self.__id = id
         self.__applicationDate = applicationDate
-        self.__applicationBeiJingTime = datetime.datetime.fromtimestamp(
-            self.__applicationDate).strftime("%Y-%m-%d %H:%M:%S")
+        self.__applicationBeiJingTime = timeFormat(self.__applicationDate)
         self.__applicationCode = applicationCode
         self.__rate = rate
         self.__participantCount = 0
