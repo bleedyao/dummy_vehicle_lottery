@@ -41,8 +41,8 @@ class TestParticipantInfo(unittest.TestCase):
     def test_correct_lottery_base_id(self):
         stub_stdout(self)
         custom = ParticipantInfo(0, 1596757823, "0000000012312123", 1)
-        custom.appendLotteryBaseId(123)
-        custom.appendLotteryBaseId(123)
+        custom.setAppendLotteryBaseId(123)
+        custom.setAppendLotteryBaseId(123)
         self.assertEqual(str(sys.stdout.getvalue()),
                          'lottery base id is enough\n')
         self.assertEqual(custom.getLotteryBaseId(), (123,))
@@ -50,10 +50,10 @@ class TestParticipantInfo(unittest.TestCase):
     def test_failure_lottery_base_id(self):
         stub_stdout(self)
         custom = ParticipantInfo(0, 1596757823, "0000000012312123", 1)
-        custom.appendLotteryBaseId(123)
+        custom.setAppendLotteryBaseId(123)
         self.assertNotEqual(str(sys.stdout.getvalue()),
                             'lottery base id is enough\n')
-        custom.appendLotteryBaseId(124)
+        custom.setAppendLotteryBaseId(124)
         self.assertEqual(str(sys.stdout.getvalue()),
                          'lottery base id is enough\n')
         self.assertEqual(custom.getLotteryBaseId(), (123,))
@@ -61,14 +61,14 @@ class TestParticipantInfo(unittest.TestCase):
 
         stub_stdout(self)
         custom = ParticipantInfo(0, 1596757823, "0000000012312123", 3)
-        custom.appendLotteryBaseId(123)
-        custom.appendLotteryBaseId(124)
-        custom.appendLotteryBaseId(124)
+        custom.setAppendLotteryBaseId(123)
+        custom.setAppendLotteryBaseId(124)
+        custom.setAppendLotteryBaseId(124)
         self.assertEqual(str(sys.stdout.getvalue()),
                          '124 is exist, ignore this id\n')
-        custom.appendLotteryBaseId(125)
-        custom.appendLotteryBaseId(125)
+        custom.setAppendLotteryBaseId(125)
+        custom.setAppendLotteryBaseId(125)
         self.assertEqual(custom.getLotteryBaseId(), (123, 124, 125))
-        custom.appendLotteryBaseId(126)
+        custom.setAppendLotteryBaseId(126)
         self.assertEqual(custom.getLotteryBaseId(), (123, 124, 125))
         self.assertNotEqual(custom.getLotteryBaseId(), (123, 124, 125, 126))

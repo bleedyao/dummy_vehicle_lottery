@@ -1,5 +1,6 @@
 import datetime
 from time_util import timeFormat
+import json
 
 
 class ParticipantInfo:
@@ -11,6 +12,22 @@ class ParticipantInfo:
         self.__rate = rate
         self.__participantCount = 0
         self.__lotteryBaseId = []
+
+    def __repr__(self):
+        map = {'id': self.__id,
+               'time': self.__applicationBeiJingTime,
+               'code': self.__applicationCode,
+               'rate': self.__rate,
+               'base_id': self.__lotteryBaseId}
+        return json.dumps(map)
+
+    def __str__(self):
+        map = {'id': self.__id,
+               'time': self.__applicationBeiJingTime,
+               'code': self.__applicationCode,
+               'rate': self.__rate,
+               'base_id': self.__lotteryBaseId}
+        return json.dumps(map)
 
     def getId(self):
         return self.__id
@@ -30,7 +47,7 @@ class ParticipantInfo:
     def getParticipantCount(self):
         return self.__participantCount
 
-    def appendLotteryBaseId(self, id):
+    def setAppendLotteryBaseId(self, id):
         if len(self.__lotteryBaseId) < self.__rate:
             if id not in self.__lotteryBaseId:
                 self.__lotteryBaseId.append(id)
