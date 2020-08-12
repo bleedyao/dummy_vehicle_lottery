@@ -1,5 +1,6 @@
 import functools
 import time
+from time_util import hmsTransfor
 
 
 def running_time(func):
@@ -8,7 +9,7 @@ def running_time(func):
         start = time.time()
         temp = func(*args, **kwargs)
         end = time.time()
-        print('run total time: %f' % (end-start))
+        print('run total time: %s' % hmsTransfor(int((end-start))))
         return temp
     return wrapper
 

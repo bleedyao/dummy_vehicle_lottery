@@ -4,10 +4,12 @@ from participant_info import ParticipantInfo
 import time
 import random
 import functools
+from decorator import running_time
 
 
+@running_time
 def start_lottery():
-    session = SessionInfo(1, '第一期摇号结果', 10000, 2)
+    session = SessionInfo(1, '第一期摇号结果', 10000, 1)
     randomInfo = RandomInformation(seed=session.getSeed())
     # 创建参与者
     pool = []
@@ -36,6 +38,7 @@ def start_lottery():
         for i in pool:
             if randomCode in i.getLotteryBaseId() and randomCode not in resultPool:
                 resultPool.append(i)
+    print(tempId)
     for i in resultPool:
         print(i)
 
