@@ -26,19 +26,17 @@ collection = db.participant
 
 tempArr = []
 
+tempDict = {}
+
 t0 = time.time()
 
 collection.remove({})
 
-for i in range(3_487_665):
+for i in range(2_707_639):
     t = int(time.time())
     a_code = str(random.randint(0, 10_000_000_000_000)).zfill(13)
-    # check = collection.find({"a_code": a_code})
-    # print("check 1: %s" % a_code)
-    # while check.count() > 0:
-    #     a_code = str(random.randint(0, 10_000_000_000_000)).zfill(13)
-    #     check = collection.find({"a_code": a_code})
-    # print("check 2: %s" % a_code)
+    while a_code in tempDict.keys():
+        a_code = str(random.randint(0, 10_000_000_000_000)).zfill(13)
     tempArr.append(
         InsertOne({
             "_id": i,
