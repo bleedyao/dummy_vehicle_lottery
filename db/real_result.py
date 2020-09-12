@@ -755,3 +755,123 @@ collection.insert_one({
             0.0000, 0.0000), "winning_percent": (0.0047, 0.0000)},
     ]
 })
+
+collection.insert_one({
+    "lottery_time": "2020/04/26",
+    "a_code": 3_376_458,
+    "generation_time": "2020/04/26 10:15",
+    "total_ids": 18_446_810,
+    "winners": 6366,
+    "winning_percent": 0.000345,
+    "winner_ratio": 2897.71,
+    "detail_data": [
+        {"magnification": 1, "count": (331453, 98), "percentage": (
+            0.0982, 0.0154), "winning_percent": (0.0003, 0.0003)},
+        {"magnification": 2, "count": (346692, 252), "percentage": (
+            0.1027, 0.0396), "winning_percent": (0.0007, 0.0007)},
+        {"magnification": 3, "count": (362667, 357), "percentage": (
+            0.1074, 0.0561), "winning_percent": (0.0010, 0.0010)},
+        {"magnification": 4, "count": (362804, 499), "percentage": (
+            0.1075, 0.0784), "winning_percent": (0.0014, 0.0014)},
+        {"magnification": 5, "count": (397459, 694), "percentage": (
+            0.1177, 0.1090), "winning_percent": (0.0017, 0.0017)},
+        {"magnification": 6, "count": (391798, 765), "percentage": (
+            0.1160, 0.1202), "winning_percent": (0.0021, 0.0020)},
+        {"magnification": 7, "count": (306188, 729), "percentage": (
+            0.0907, 0.1145), "winning_percent": (0.0024, 0.0024)},
+        {"magnification": 8, "count": (236468, 617), "percentage": (
+            0.0700, 0.0969), "winning_percent": (0.0028, 0.0026)},
+        {"magnification": 9, "count": (253106, 853), "percentage": (
+            0.0750, 0.1340), "winning_percent": (0.0031, 0.0034)},
+        {"magnification": 10, "count": (165171, 561), "percentage": (
+            0.0489, 0.0881), "winning_percent": (0.0035, 0.0034)},
+        {"magnification": 11, "count": (112239, 481), "percentage": (
+            0.0332, 0.0756), "winning_percent": (0.0038, 0.0043)},
+        {"magnification": 12, "count": (90064, 373), "percentage": (
+            0.0267, 0.0586), "winning_percent": (0.0041, 0.0041)},
+        {"magnification": 13, "count": (20334, 87), "percentage": (
+            0.0060, 0.0137), "winning_percent": (0.0045, 0.0043)},
+        {"magnification": 14, "count": (15, 0), "percentage": (
+            0.0000, 0.0000), "winning_percent": (0.0048, 0.0000)},
+    ]
+})
+
+collection.insert_one({
+    "lottery_time": "2020/06/26",
+    "a_code": 3_435_294,
+    "generation_time": "2020/06/26 10:15",
+    "total_ids": 19_012_845,
+    "winners": 6366,
+    "winning_percent": 0.000335,
+    "winner_ratio": 2986.62,
+    "detail_data": [
+        {"magnification": 1, "count": (333543, 110), "percentage": (
+            0.0971, 0.0173), "winning_percent": (0.0003, 0.0003)},
+        {"magnification": 2, "count": (353089, 261), "percentage": (
+            0.1028, 0.0410), "winning_percent": (0.0007, 0.0007)},
+        {"magnification": 3, "count": (358269, 374), "percentage": (
+            0.1043, 0.0587), "winning_percent": (0.0010, 0.0010)},
+        {"magnification": 4, "count": (359631, 477), "percentage": (
+            0.1047, 0.0749), "winning_percent": (0.0013, 0.0013)},
+        {"magnification": 5, "count": (393900, 677), "percentage": (
+            0.1147, 0.1063), "winning_percent": (0.0017, 0.0017)},
+        {"magnification": 6, "count": (394771, 785), "percentage": (
+            0.1149, 0.1233), "winning_percent": (0.0020, 0.0020)},
+        {"magnification": 7, "count": (326530, 749), "percentage": (
+            0.0951, 0.1177), "winning_percent": (0.0023, 0.0023)},
+        {"magnification": 8, "count": (236530, 628), "percentage": (
+            0.0687, 0.0989), "winning_percent": (0.0027, 0.0027)},
+        {"magnification": 9, "count": (253338, 754), "percentage": (
+            0.0737, 0.1184), "winning_percent": (0.0030, 0.0030)},
+        {"magnification": 10, "count": (181189, 596), "percentage": (
+            0.0527, 0.0936), "winning_percent": (0.0033, 0.0033)},
+        {"magnification": 11, "count": (118721, 451), "percentage": (
+            0.0346, 0.0708), "winning_percent": (0.0037, 0.0038)},
+        {"magnification": 12, "count": (90712, 362), "percentage": (
+            0.0267, 0.0569), "winning_percent": (0.0040, 0.0039)},
+        {"magnification": 13, "count": (34522, 142), "percentage": (
+            0.0100, 0.0223), "winning_percent": (0.0044, 0.0041)},
+        {"magnification": 14, "count": (22, 0), "percentage": (
+            0.0000, 0.0000), "winning_percent": (0.0047, 0.0000)},
+    ]
+})
+
+collection.insert_one({
+    "lottery_time": "2020/08/26",
+    "a_code": 3_487_665,
+    "generation_time": "2020/08/26 10:15",
+    "total_ids": 19_580_861,
+    "winners": 6366,
+    "winning_percent": 0.000325,
+    "winner_ratio": 3075.85,
+    "detail_data": [
+        {"magnification": 1, "count": (331078, 106), "percentage": (
+            0.0949, 0.0163), "winning_percent": (0.0003, 0.0003)},
+        {"magnification": 2, "count": (354401, 228), "percentage": (
+            0.1016, 0.0358), "winning_percent": (0.0007, 0.0006)},
+        {"magnification": 3, "count": (357023, 314), "percentage": (
+            0.1024, 0.0497), "winning_percent": (0.0010, 0.0009)},
+        {"magnification": 4, "count": (356078, 453), "percentage": (
+            0.1021, 0.0712), "winning_percent": (0.0013, 0.0013)},
+        {"magnification": 5, "count": (389453, 618), "percentage": (
+            0.1117, 0.0971), "winning_percent": (0.0016, 0.0016)},
+        {"magnification": 6, "count": (398918, 783), "percentage": (
+            0.1144, 0.1230), "winning_percent": (0.0020, 0.0020)},
+        {"magnification": 7, "count": (342467, 780), "percentage": (
+            0.0982, 0.1225), "winning_percent": (0.0023, 0.0023)},
+        {"magnification": 8, "count": (241212, 669), "percentage": (
+            0.0692, 0.1051), "winning_percent": (0.0026, 0.0028)},
+        {"magnification": 9, "count": (251746, 709), "percentage": (
+            0.0722, 0.1114), "winning_percent": (0.0029, 0.0028)},
+        {"magnification": 10, "count": (197286, 655), "percentage": (
+            0.0566, 0.1029), "winning_percent": (0.0033, 0.0033)},
+        {"magnification": 11, "count": (126016, 463), "percentage": (
+            0.0361, 0.0727), "winning_percent": (0.0036, 0.0037)},
+        {"magnification": 12, "count": (92748, 382), "percentage": (
+            0.0266, 0.0600), "winning_percent": (0.0039, 0.0041)},
+        {"magnification": 13, "count": (49210, 206), "percentage": (
+            0.0141, 0.0324), "winning_percent": (0.0042, 0.0042)},
+        {"magnification": 14, "count": (29, 0), "percentage": (
+            0.0000, 0.0000), "winning_percent": (0.0046, 0.0000)},
+    ]
+})
