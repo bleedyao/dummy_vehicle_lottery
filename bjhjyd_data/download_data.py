@@ -6,8 +6,9 @@ import json
 import os
 import re
 
-updated_cookie = 'JSESSIONID=FA459CAEF8F03E10B8BBA38F309FAE6C-n1.Tomcat1; __utmc=25041897; BCSI-CS-e1a6168bf77b613b=2; __utma=25041897.654479457.1598424218.1603876553.1603951976.8; __utmz=25041897.1603951976.8.7.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utmt=1; __utmb=25041897.1.10.1603951976'
+updated_cookie = 'JSESSIONID=8C8E953C583B6051E519894092685673-n1.Tomcat1; __utmc=25041897; BCSI-CS-e1a6168bf77b613b=2; __utmz=25041897.1603951976.8.7.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utma=25041897.654479457.1598424218.1603951976.1603956833.9; __utmt=1; __utmb=25041897.1.10.1603956833'
 custom_delay_time = (2, 5)
+cache_time = 1 # hour
 
 @running_time
 def get_one_page(i, code='aaaa'):
@@ -17,6 +18,10 @@ def get_one_page(i, code='aaaa'):
     '''
     # 增加检查缓存的功能
     file_name = str(i) + '.html' 
+    if get_expiration_time(file_name) > time.time():
+        print('read the cache content: %s' % file_name)
+        return (int(total_page_num(file_name)), get_valid_code(file_name))
+        
     url = 'https://apply.bjhjyd.gov.cn/apply/pool/personQuery.do'
     # pageNo=1&regType=PTC&issueNumber=202005&applyCode=&validCode=fw7l
     tmp = i 
@@ -37,12 +42,12 @@ def save_file(content, file_name):
     if not os.path.exists(dir):
         os.mkdir(dir)
     with open(os.path.join(dir, file_name), 'wb') as f:
+        f.write(str(time.time() + cache_time * 60 * 60 ).join('\r\n').encode('utf8'))
         f.write(content.encode('utf8'))
 
 
 def total_page_num(file_name):
     dir = os.path.abspath('pages')
-    delay()
     with open(os.path.join(dir, file_name), 'r') as f:
         temp = f.read()
         return re.search(r'共<span class="dred">(.*)</span>页', temp, re.M | re.I).group(1)
@@ -53,6 +58,20 @@ def get_valid_code(file_name):
     delay()
 
     return 'bbbb'
+
+def get_expiration_time(file_name):
+    dir = os.path.abspath('pages')
+    result = 0
+    if os.path.exists(dir) and os.path.exists(os.path.join(dir, file_name)):
+        with open(os.path.join(dir, file_name), 'r') as f:
+            f.readline()
+            tmp = f.readline()
+            print(tmp)
+            try:
+                result = float(tmp)
+            except TypeError as e:
+                print(e)
+    return result
 
 @delay_time
 def delay():
