@@ -5,6 +5,8 @@ import random
 import json
 import os
 import re
+from PIL import Image
+import pytesseract
 
 updated_cookie = 'JSESSIONID=8C8E953C583B6051E519894092685673-n1.Tomcat1; __utmc=25041897; BCSI-CS-e1a6168bf77b613b=2; __utmz=25041897.1603951976.8.7.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utma=25041897.654479457.1598424218.1603951976.1603956833.9; __utmt=1; __utmb=25041897.1.10.1603956833'
 custom_delay_time = (5, 15)
@@ -20,7 +22,7 @@ def get_one_page(i, code='aaaa'):
     file_name = str(i) + '.html' 
     if get_expiration_time(file_name) > time.time():
         print('read the cache content: %s' % file_name)
-        return (int(total_page_num(file_name)), get_valid_code(file_name))
+        return (int(total_page_num(file_name)), get_valid_code(i))
         
     url = 'https://apply.bjhjyd.gov.cn/apply/pool/personQuery.do'
     # pageNo=1&regType=PTC&issueNumber=202005&applyCode=&validCode=fw7l
@@ -35,7 +37,7 @@ def get_one_page(i, code='aaaa'):
     })
     res.encoding = 'utf8'
     save_file(res.text, file_name)
-    return (int(total_page_num(file_name)), get_valid_code(file_name))
+    return (int(total_page_num(file_name)), get_valid_code(i))
 
 
 def save_file(content, file_name):
@@ -54,12 +56,31 @@ def total_page_num(file_name):
         temp = f.read()
         return re.search(r'共<span class="dred">(.*)</span>页', temp, re.M | re.I).group(1)
 
-def get_valid_code(file_name):
+def get_valid_code(index):
     # 识别图片验证码 valid_code = 识别验证码
     dir = os.path.abspath('pages')
-    delay('ready to request the valid code')
+    # res = requests.get('https://apply.bjhjyd.gov.cn/apply/validCodeImage.html?ee=1')
+    # delay('ready to request the valid code')
+    # with open(os.path.join(dir, str(index) + '.jpg'), 'wb') as f:
+    #     f.write(res.content)
+    return recogniztion_img(os.path.join(dir, str(index) + '.jpg'))
 
-    return 'bbbb'
+def recogniztion_img(file_path):
+    image = Image.open(file_path)
+    # image.show()
+    image_grey = image.convert('L')
+    # image_grey.show()
+    table = []
+    for i in range(256):
+        if i < 140:
+            table.append(0)
+        else:
+            table.append(1)
+    image_bi = image_grey.point(table, '1')
+    # 识别验证码
+    verify_code = pytesseract.image_to_string(image_bi)
+    print(verify_code)
+    pass
 
 def get_expiration_time(file_name):
     dir = os.path.abspath('pages')
