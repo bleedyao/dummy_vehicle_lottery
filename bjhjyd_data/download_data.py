@@ -164,6 +164,6 @@ def delay(detail='ready into delay'):
 
 
 my_infomation = {
-    'name': '15201304069',
-    'pwd': 'yao#d6c78rs1'
+    'name': 'xxxx',
+    'pwd': 'xxxxxxx'
 }
