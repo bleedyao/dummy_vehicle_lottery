@@ -14,6 +14,7 @@ def manual_cache_web_page():
             c. 重新登陆并获取新的 cookie，并重新请求列表网址
        6. 保存返回信息至指定路径
     '''
+    request_lettory_pool()
 
 if __name__ == "__main__":
     manual_cache_web_page()
