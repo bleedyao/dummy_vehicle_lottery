@@ -8,7 +8,7 @@ import re
 from PIL import Image
 import pytesseract
 
-cookie = 'JSESSIONID=8C8E953C583B6051E519894092685673-n1.Tomcat1; __utmc=25041897; BCSI-CS-e1a6168bf77b613b=2; __utmz=25041897.1603951976.8.7.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utma=25041897.654479457.1598424218.1603951976.1603956833.9; __utmt=1; __utmb=25041897.1.10.1603956833'
+cookie = 'JSESSIONID=15FD1C30EE9C2EB6B4234BEFBC5F6A06-n1.Tomcat1; JSESSIONID=A1CB295588B2B457D3DA5A416ECEE9FF-n1.Tomcat1; __utmc=25041897; __utmz=25041897.1606098025.15.11.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); BCSI-CS-7e324c105e396941=2; __utma=25041897.654479457.1598424218.1606373275.1606375809.19; __utmb=25041897.3.10.1606375809'
 custom_delay_time = (5, 10)
 cache_time = 1 # hour
 
@@ -23,55 +23,67 @@ def request_lettory_pool():
     # 如果 cookie 已经过期，重新登陆，更新 cookie
     if tmp.find('个人普通指标摇号池编码公布') == -1:
         print('the cookie was expired')
-        update_cookie()
+        # update_cookie()
         
-def update_cookie():
-    url = 'https://apply.bjhjyd.gov.cn/apply/user/person/login.html'
-    '''
-    userType: 0
-    ranStr: 
-    userTypeSelect: 0
-    serviceUserTypeSelect: 0
-    serviceType: 1
-    personMobile: xxxxxxx
-    loginType: mobile
-    unitLoginTypeSelect: 0
-    unitMobile: 
-    orgCode: 
-    password: xxxxxx
-    pin: 
-    validCode: 7thq
-    '''
-    data = {
-        'userType': 0,
-        'ranStr': '',
-        'userTypeSelect': 0,
-        'serviceUserTypeSelect': 0,
-        'serviceType': 1,
-        'personMobile': my_infomation['name'],
-        'loginType': 'mobile',
-        'unitLoginTypeSelect': 0,
-        'unitMobile': '',
-        'orgCode': '',
-        'password': my_infomation['pwd'],
-        'pin': '',
-        'validCode': get_new_vaild_code()
-    }
+# def update_cookie():
+#     url = 'https://apply.bjhjyd.gov.cn/apply/user/person/login.html'
+#     '''
+#     userType: 0
+#     ranStr: 
+#     userTypeSelect: 0
+#     serviceUserTypeSelect: 0
+#     serviceType: 1
+#     personMobile: xxxxxxx
+#     loginType: mobile
+#     unitLoginTypeSelect: 0
+#     unitMobile: 
+#     orgCode: 
+#     password: xxxxxx
+#     pin: 
+#     validCode: 7thq
+#     '''
+#     data = {
+#         'userType': 0,
+#         'ranStr': '',
+#         'userTypeSelect': 0,
+#         'serviceUserTypeSelect': 0,
+#         'serviceType': 1,
+#         'personMobile': my_infomation['name'],
+#         'loginType': 'mobile',
+#         'unitLoginTypeSelect': 0,
+#         'unitMobile': '',
+#         'orgCode': '',
+#         'password': my_infomation['pwd'],
+#         'pin': '',
+#         'validCode': get_new_vaild_code()
+#     }
 
-    res = requests.post(url, data=json.dumps(data))
-    print(res.status_code)
+#     res = requests.post(url, data=json.dumps(data))
+#     print(res.status_code)
 
-def get_new_vaild_code():
-    res = requests.get('https://apply.bjhjyd.gov.cn/apply/validCodeImage.html?ee=1')
-    delay('ready to request the valid code')
-    path = os.path.join(os.path.abspath('pages'), 'vaild_code.jpg')
-    print('status code: '+ str(res.status_code))
-    with open(path, 'wb') as f:
-        f.write(res.content)
-    image = Image.open(path)
-    image.show()
-    vaild_code = input('手动输入你看到的验证码：')
-    return vaild_code
+# def get_new_vaild_code():
+#     res = requests.get('https://apply.bjhjyd.gov.cn/apply/validCodeImage.html?ee=1', headers={
+#         'Host': 'apply.bjhjyd.gov.cn'
+#         'Connection': 'keep-alive'
+#         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
+#         'Accept': 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8'
+#         'Sec-Fetch-Site': 'same-site'
+#         'Sec-Fetch-Mode': 'no-cors'
+#         'Sec-Fetch-Dest': 'image'
+#         'Referer': 'https://www.bjhjyd.gov.cn/'
+#         'Accept-Encoding': 'gzip, deflate, br'
+#         'Accept-Language': 'en-US,en;q=0.9'
+#         'Cookie': cookie
+#     })
+#     delay('ready to request the valid code')
+#     path = os.path.join(os.path.abspath('pages'), 'vaild_code.jpg')
+#     print('status code: '+ str(res.status_code))
+#     with open(path, 'wb') as f:
+#         f.write(res.content)
+#     image = Image.open(path)
+#     image.show()
+#     vaild_code = input('手动输入你看到的验证码：')
+#     return vaild_code
 
 @running_time
 def get_one_page(i, code='aaaa'):
@@ -81,9 +93,9 @@ def get_one_page(i, code='aaaa'):
     '''
     # 增加检查缓存的功能
     file_name = str(i) + '.html' 
-    if get_expiration_time(file_name) > time.time():
-        print('read the cache content: %s' % file_name)
-        return (int(total_page_num(file_name)), get_valid_code(i))
+    # if get_expiration_time(file_name) > time.time():
+    #     print('read the cache content: %s' % file_name)
+    #     return (int(total_page_num(file_name)), get_valid_code(i))
         
     url = 'https://apply.bjhjyd.gov.cn/apply/pool/personQuery.do'
     # pageNo=1&regType=PTC&issueNumber=202005&applyCode=&validCode=fw7l
@@ -98,7 +110,7 @@ def get_one_page(i, code='aaaa'):
     })
     res.encoding = 'utf8'
     save_file(res.text, file_name)
-    return (int(total_page_num(file_name)), get_valid_code(i))
+    # return (int(total_page_num(file_name)), get_valid_code(i))
 
 
 def save_file(content, file_name):
@@ -117,14 +129,26 @@ def total_page_num(file_name):
         temp = f.read()
         return re.search(r'共<span class="dred">(.*)</span>页', temp, re.M | re.I).group(1)
 
-def get_valid_code(index):
+def get_valid_code():
     # 识别图片验证码 valid_code = 识别验证码
     dir = os.path.abspath('pages')
-    # res = requests.get('https://apply.bjhjyd.gov.cn/apply/validCodeImage.html?ee=1')
+    res = requests.get('https://apply.bjhjyd.gov.cn/apply/validCodeImage.html?ee=1', headers={
+       'Cookie': cookie
+    })
     # delay('ready to request the valid code')
-    # with open(os.path.join(dir, str(index) + '.jpg'), 'wb') as f:
-    #     f.write(res.content)
-    return recogniztion_img(os.path.join(dir, str(index) + '.jpg'))
+    with open(os.path.join(dir, 'valid_code.jpg'), 'wb') as f:
+        f.write(res.content)
+    image = Image.open(os.path.join(dir, 'valid_code.jpg'))
+    image.show()
+
+def check_valid_code(str):
+    print('https://apply.bjhjyd.gov.cn/apply/checkValidCode.html?validCode=' + str)
+    res = requests.get('https://apply.bjhjyd.gov.cn/apply/checkValidCode.html?validCode=' + str, headers={
+       'Cookie': cookie
+    })
+    result = re.search(r'\'(.*)\'', res.text, re.M | re.I).group(1)
+    print(result)
+    return result
 
 def recogniztion_img(file_path):
     image = Image.open(file_path)
