@@ -8,7 +8,7 @@ import re
 from PIL import Image
 import pytesseract
 
-cookie = 'JSESSIONID=206F282E8A9EC5D32962DA517C825FFA-n1.Tomcat1; JSESSIONID=A1CB295588B2B457D3DA5A416ECEE9FF-n1.Tomcat1; __utmc=25041897; __utmz=25041897.1606098025.15.11.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); BCSI-CS-7e324c105e396941=2; __utma=25041897.654479457.1598424218.1606375809.1606461257.20; __utmt=1; __utmb=25041897.1.10.1606461257'
+cookie = 'JSESSIONID=C17C35884D831FE7C85673CF74D889E8-n1.Tomcat1; JSESSIONID=A1CB295588B2B457D3DA5A416ECEE9FF-n1.Tomcat1; __utmc=25041897; __utmz=25041897.1606098025.15.11.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); BCSI-CS-7e324c105e396941=2; __utma=25041897.654479457.1598424218.1606375809.1606461257.20; __utmt=1; __utmb=25041897.3.10.1606461257'
 custom_delay_time = (5, 10)
 cache_time = 1 # hour
 
@@ -104,7 +104,7 @@ def get_one_page(i, code='aaaa'):
         tmp = 1
     data = {'pageNo': str(tmp), 'regType': 'PTC',
             'issueNumber': '202005', 'applyCode': '', 'validCode': code}
-    delay('ready to request person query')
+    # delay('ready to request person query')
     res = requests.post(url, data=json.dumps(data), headers={
         'Cookie': cookie
     })
@@ -118,7 +118,7 @@ def save_file(content, file_name):
     if not os.path.exists(dir):
         os.mkdir(dir)
     with open(os.path.join(dir, file_name), 'wb') as f:
-        f.write(str(time.time() + cache_time * 60 * 60 ).join('\r\n').encode('utf8'))
+        # f.write(str(time.time() + cache_time * 60 * 60 ).join('\r\n').encode('utf8'))
         f.write(content.encode('utf8'))
     print('save the file: %s' % file_name)
 
@@ -143,7 +143,7 @@ def get_valid_code():
     image.show()
 
 def check_valid_code(str):
-    print('https://apply.bjhjyd.gov.cn/apply/checkValidCode.html?validCode=%s' % str)
+    # print('https://apply.bjhjyd.gov.cn/apply/checkValidCode.html?validCode=%s' % str)
     res = requests.get('https://apply.bjhjyd.gov.cn/apply/checkValidCode.html?validCode=%s' % str, headers={
        'Cookie': cookie
     })

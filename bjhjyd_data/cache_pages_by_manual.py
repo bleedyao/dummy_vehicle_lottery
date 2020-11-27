@@ -11,12 +11,14 @@ def manual_cache_web_page():
        5. 请求摇奖池数据
     '''
     result_for_check = 'false'
+    valid_code = ''
     while result_for_check == 'false':
         get_valid_code()
         valid_code = input('请手动输入验证码: ')
         print(valid_code)
         result_for_check = check_valid_code(valid_code)
         continue
+    get_one_page(1, valid_code)
 
 if __name__ == "__main__":
     manual_cache_web_page()
