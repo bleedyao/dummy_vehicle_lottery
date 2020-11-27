@@ -7,6 +7,7 @@ import os
 import re
 from PIL import Image
 import pytesseract
+import logging
 
 cookie = 'JSESSIONID=FB4DA6B56E06955D04BC9E502DBC90C4-n1.Tomcat1; JSESSIONID=A1CB295588B2B457D3DA5A416ECEE9FF-n1.Tomcat1; __utmc=25041897; __utmz=25041897.1606098025.15.11.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); BCSI-CS-7e324c105e396941=2; __utma=25041897.654479457.1598424218.1606461257.1606464657.21; __utmt=1; __utmb=25041897.1.10.1606464657'
 custom_delay_time = (5, 10)
@@ -91,6 +92,16 @@ def get_one_page(i, code='aaaa'):
     i: 页数
     code: 验证码
     '''
+    try:
+        from http.client import HTTPConnection
+    except ImportError:
+        from httplib import HTTPConnection
+    HTTPConnection.debuglevel = 1
+    logging.basicConfig() # 初始化 logging，否则不会看到任何 requests 的输出。
+    logging.getLogger().setLevel(logging.DEBUG)
+    requests_log = logging.getLogger("requests.packages.urllib3")
+    requests_log.setLevel(logging.DEBUG)
+    requests_log.propagate = True
     # 增加检查缓存的功能
     file_name = str(i) + '.html' 
     # if get_expiration_time(file_name) > time.time():
@@ -102,13 +113,12 @@ def get_one_page(i, code='aaaa'):
     tmp = i 
     if tmp < 0:
         tmp = 1
-    data = {'pageNo': tmp, 'regType': 'PTC',
-            'issueNumber': 202005, 'applyCode': '', 'validCode': code}
+    data = {'pageNo': str(tmp), 'regType': 'PTC',
+            'issueNumber': '202005', 'applyCode': '', 'validCode': code}
     # delay('ready to request person query')
     res = requests.post(url, data=json.dumps(data), headers={
         'Cookie': cookie
     })
-    print(json.dumps(data))
     res.encoding = 'utf8'
     print(re.search(r'共<span class="dred">(.*)</span>页', res.text, re.M | re.I).group(1))
     dir = os.path.abspath('pages')
