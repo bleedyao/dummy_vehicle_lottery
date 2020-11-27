@@ -8,7 +8,7 @@ import re
 from PIL import Image
 import pytesseract
 
-cookie = 'JSESSIONID=15FD1C30EE9C2EB6B4234BEFBC5F6A06-n1.Tomcat1; JSESSIONID=A1CB295588B2B457D3DA5A416ECEE9FF-n1.Tomcat1; __utmc=25041897; __utmz=25041897.1606098025.15.11.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); BCSI-CS-7e324c105e396941=2; __utma=25041897.654479457.1598424218.1606373275.1606375809.19; __utmb=25041897.3.10.1606375809'
+cookie = 'JSESSIONID=206F282E8A9EC5D32962DA517C825FFA-n1.Tomcat1; JSESSIONID=A1CB295588B2B457D3DA5A416ECEE9FF-n1.Tomcat1; __utmc=25041897; __utmz=25041897.1606098025.15.11.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); BCSI-CS-7e324c105e396941=2; __utma=25041897.654479457.1598424218.1606375809.1606461257.20; __utmt=1; __utmb=25041897.1.10.1606461257'
 custom_delay_time = (5, 10)
 cache_time = 1 # hour
 
@@ -133,7 +133,7 @@ def get_valid_code():
     # 识别图片验证码 valid_code = 识别验证码
     dir = os.path.abspath('pages')
     print('获取一个新的验证码')
-    res = requests.get('https://apply.bjhjyd.gov.cn/apply/validCodeImage.html?ee=1', headers={
+    res = requests.get('https://apply.bjhjyd.gov.cn/apply/validCodeImage.html?ee=1',  headers={
        'Cookie': cookie
     })
     # delay('ready to request the valid code')
@@ -144,10 +144,11 @@ def get_valid_code():
 
 def check_valid_code(str):
     print('https://apply.bjhjyd.gov.cn/apply/checkValidCode.html?validCode=%s' % str)
-    res = requests.get('https://apply.bjhjyd.gov.cn/apply/checkValidCode.html?validCode=' + str, headers={
+    res = requests.get('https://apply.bjhjyd.gov.cn/apply/checkValidCode.html?validCode=%s' % str, headers={
        'Cookie': cookie
     })
-    result = re.search(r'\'(.*)\'', res.text, re.M | re.I).group(1).strip()
+    # print(res.headers)
+    result = re.search(r'\'(.*)\'', res.text, re.M | re.I).group(1)
     print(result)
     return result
 
