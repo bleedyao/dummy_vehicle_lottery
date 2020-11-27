@@ -116,7 +116,7 @@ def get_one_page(i, code='aaaa'):
     data = {'pageNo': str(tmp), 'regType': 'PTC',
             'issueNumber': '202005', 'applyCode': '', 'validCode': code}
     # delay('ready to request person query')
-    res = requests.post(url, data=json.dumps(data), headers={
+    res = requests.post(url, data=data, headers={
         'Cookie': cookie
     })
     res.encoding = 'utf8'
