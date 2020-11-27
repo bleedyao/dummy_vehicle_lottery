@@ -132,6 +132,7 @@ def total_page_num(file_name):
 def get_valid_code():
     # 识别图片验证码 valid_code = 识别验证码
     dir = os.path.abspath('pages')
+    print('获取一个新的验证码')
     res = requests.get('https://apply.bjhjyd.gov.cn/apply/validCodeImage.html?ee=1', headers={
        'Cookie': cookie
     })
@@ -142,11 +143,11 @@ def get_valid_code():
     image.show()
 
 def check_valid_code(str):
-    print('https://apply.bjhjyd.gov.cn/apply/checkValidCode.html?validCode=' + str)
+    print('https://apply.bjhjyd.gov.cn/apply/checkValidCode.html?validCode=%s' % str)
     res = requests.get('https://apply.bjhjyd.gov.cn/apply/checkValidCode.html?validCode=' + str, headers={
        'Cookie': cookie
     })
-    result = re.search(r'\'(.*)\'', res.text, re.M | re.I).group(1)
+    result = re.search(r'\'(.*)\'', res.text, re.M | re.I).group(1).strip()
     print(result)
     return result
 
