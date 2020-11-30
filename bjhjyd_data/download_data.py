@@ -9,7 +9,7 @@ from PIL import Image
 import pytesseract
 import logging
 
-cookie = 'JSESSIONID=FB4DA6B56E06955D04BC9E502DBC90C4-n1.Tomcat1; JSESSIONID=A1CB295588B2B457D3DA5A416ECEE9FF-n1.Tomcat1; __utmc=25041897; __utmz=25041897.1606098025.15.11.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); BCSI-CS-7e324c105e396941=2; __utma=25041897.654479457.1598424218.1606461257.1606464657.21; __utmt=1; __utmb=25041897.1.10.1606464657'
+cookie = 'JSESSIONID=074CC9C9B9EC18DE1862C9114A8EA889-n1.Tomcat1; JSESSIONID=A1CB295588B2B457D3DA5A416ECEE9FF-n1.Tomcat1; __utmc=25041897; __utmz=25041897.1606098025.15.11.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); BCSI-CS-7e324c105e396941=2; __utma=25041897.654479457.1598424218.1606700482.1606703035.23; __utmt=1; __utmb=25041897.4.10.1606703035'
 custom_delay_time = (5, 10)
 cache_time = 1 # hour
 
@@ -128,6 +128,15 @@ def get_one_page(i, code='aaaa'):
     save_file(res.text, file_path)
     # return (int(total_page_num(file_name)), get_valid_code(i))
 
+def get_page_count():
+    result = 1
+    dir = os.path.abspath('pages')
+    for path, dirs, files in os.walk(dir):
+        for file_name in files:
+            if file_name.endswith('.html'):
+                if int(os.path.splitext(file_name)[0]) >= result:
+                    result = int(os.path.splitext(file_name)[0]) + 1
+    return result
 
 def save_file(content, file_path):
     with open(file_path, 'wb') as f:
