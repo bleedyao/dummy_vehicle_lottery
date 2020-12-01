@@ -9,8 +9,8 @@ from PIL import Image
 import pytesseract
 import logging
 
-cookie = 'JSESSIONID=656B4D146910CA0A5DF0FDD604D05EA2-n1.Tomcat1; __utmz=25041897.1606098025.15.11.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utma=25041897.654479457.1598424218.1606703035.1606793807.24; __utmc=25041897; __utmt=1; __utmb=25041897.1.10.1606793807; BCSI-CS-7e324c105e396941=2'
-ustom_delay_time = (5, 10)
+cookie = 'JSESSIONID=F583DF9A4FA8C13358295BC64345B991-n1.Tomcat1; __utmz=25041897.1606098025.15.11.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utmc=25041897; BCSI-CS-7e324c105e396941=2; __utma=25041897.654479457.1598424218.1606793807.1606807653.25; __utmt=1; __utmb=25041897.1.10.1606807653'
+custom_delay_time = (5, 10)
 cache_time = 1 # hour
 
 
@@ -92,16 +92,16 @@ def get_one_page(i, code='aaaa'):
     i: 页数
     code: 验证码
     '''
-    try:
-        from http.client import HTTPConnection
-    except ImportError:
-        from httplib import HTTPConnection
-    HTTPConnection.debuglevel = 1
-    logging.basicConfig() # 初始化 logging，否则不会看到任何 requests 的输出。
-    logging.getLogger().setLevel(logging.DEBUG)
-    requests_log = logging.getLogger("requests.packages.urllib3")
-    requests_log.setLevel(logging.DEBUG)
-    requests_log.propagate = True
+    # try:
+    #     from http.client import HTTPConnection
+    # except ImportError:
+    #     from httplib import HTTPConnection
+    # HTTPConnection.debuglevel = 1
+    # logging.basicConfig() # 初始化 logging，否则不会看到任何 requests 的输出。
+    # logging.getLogger().setLevel(logging.DEBUG)
+    # requests_log = logging.getLogger("requests.packages.urllib3")
+    # requests_log.setLevel(logging.DEBUG)
+    # requests_log.propagate = True
     # 增加检查缓存的功能
     file_name = str(i) + '.html' 
     # if get_expiration_time(file_name) > time.time():
@@ -129,6 +129,9 @@ def get_one_page(i, code='aaaa'):
     # return (int(total_page_num(file_name)), get_valid_code(i))
 
 def get_page_count():
+    return get_page_next_count() - 1
+
+def get_page_next_count():
     result = 1
     dir = os.path.abspath('pages')
     for path, dirs, files in os.walk(dir):
