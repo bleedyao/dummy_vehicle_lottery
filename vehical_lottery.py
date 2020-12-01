@@ -88,3 +88,15 @@ class RandomInformation:
         while True:
             id += 1
             yield id
+
+
+@running_time
+def testArr():
+    arr = []
+    for i in range(19_580_861):
+        arr.append(random.randint(0, 10_000_000_000_000))
+    len(arr)
+
+
+if __name__ == "__main__":
+    testArr()

@@ -9,7 +9,18 @@ def running_time(func):
         start = time.time()
         temp = func(*args, **kwargs)
         end = time.time()
-        print('run total time: %s' % hmsTransfor(int((end-start))))
+        print('run time: %s' % (end-start))
+        return temp
+    return wrapper
+
+
+def delay_time(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        temp = func(*args, **kwargs)
+        end = time.time()
+        print('delay time: %s' % (end-start))
         return temp
     return wrapper
 
