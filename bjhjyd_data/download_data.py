@@ -9,8 +9,8 @@ from PIL import Image
 import pytesseract
 import logging
 
-cookie = 'JSESSIONID=074CC9C9B9EC18DE1862C9114A8EA889-n1.Tomcat1; JSESSIONID=A1CB295588B2B457D3DA5A416ECEE9FF-n1.Tomcat1; __utmc=25041897; __utmz=25041897.1606098025.15.11.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); BCSI-CS-7e324c105e396941=2; __utma=25041897.654479457.1598424218.1606700482.1606703035.23; __utmt=1; __utmb=25041897.4.10.1606703035'
-custom_delay_time = (5, 10)
+cookie = 'JSESSIONID=656B4D146910CA0A5DF0FDD604D05EA2-n1.Tomcat1; __utmz=25041897.1606098025.15.11.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utma=25041897.654479457.1598424218.1606703035.1606793807.24; __utmc=25041897; __utmt=1; __utmb=25041897.1.10.1606793807; BCSI-CS-7e324c105e396941=2'
+ustom_delay_time = (5, 10)
 cache_time = 1 # hour
 
 
