@@ -17,7 +17,6 @@ def manual_cache_web_page():
         valid_code = input('请手动输入验证码: ')
         print(valid_code)
         result_for_check = check_valid_code(valid_code)
-        continue
     count = get_page_count()
     get_one_page(count, code=valid_code)
     # print(count)
